@@ -16,6 +16,7 @@
 // Libraries
 
 #include <iostream>
+#include <fstream>
 
 // ========================================================
 // Macros
@@ -34,6 +35,8 @@ class computer{
 	private:
 		// create a 2d pointer 
 		int **arr;
+
+		std::string nameOfInputFile;
 
 };
 
