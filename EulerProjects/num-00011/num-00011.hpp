@@ -16,6 +16,7 @@
 // Libraries
 
 #include <iostream>
+#include <fstream>
 
 // ========================================================
 // Macros
@@ -30,19 +31,13 @@ class computer{
 	public:
 		// to begin the code
 		void initializer();
-		// to find the multipliers
-		void findMultipliers();
-		// to get the sum of multipliers
-		void sum();
 
 	private:
-		// the given number
-		unsigned int num;
-		// the container to store the multipliers
-		std::vector <unsigned int> multipliers;
-		// to store the final value
-		unsigned int sumTotal;
+		// create a 2d pointer 
+		int **arr;
+
+		std::string nameOfInputFile;
 
 };
 
-#endif // NUM_00001_HPP
+#endif // NUM_00011_HPP
