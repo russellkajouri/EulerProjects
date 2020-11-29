@@ -47,5 +47,11 @@ void computer :: initializer(){
 	// to display the message and trunc the buffer
 	std::cout << HTAB << "The file is found!" << std::endl;
 
+
+	// ---------------------------------------------------------------------
+
+
+	int rowsCounter, clmnsCounter;
+
 }
 
