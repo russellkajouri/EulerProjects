@@ -35,8 +35,10 @@ class computer{
 	private:
 		// create a 2d pointer 
 		int **arr;
-
+		// to store the name of input file
 		std::string nameOfInputFile;
+		// rows and columns of the input file
+		int rows, clmns;
 
 };
 
