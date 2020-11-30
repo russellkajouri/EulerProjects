@@ -56,7 +56,7 @@ void computer :: initializer(){
 	// to find number of lines
 	while(getline(in, line)){
 		
-		std::cout << HTAB << line << '\n';
+		std::cout << HTAB << GRN << line << '\n';
 
 		// to find the number of clmn, once 
 		if(check){
@@ -96,14 +96,19 @@ void computer :: initializer(){
 		row++;
 	}
 	
-	std::cout << std::setw(2);
+
+	std::cout << RED << HTAB << "array has been filled..." << CYN << std::endl;
+
 	for(int i = 0; i < rows; i++){
-		for(int j = 0; j < clmns; j++)
-			std::cout << arr[i][j] << ' ';
+		std::cout << HTAB;
+		for(int j = 0; j < clmns; j++){
+			std::cout << std::setw(2) << arr[i][j] << ' ';
+			std::cout.width(2);
+		}
 		std::cout << '\n';
 	}
 
-	std::cout << rows << '\t' << clmns << '\n';
+	std::cout << DFT << rows << '\t' << clmns << '\n';
 
 }
 
