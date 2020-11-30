@@ -15,13 +15,20 @@
 // ========================================================
 // Libraries
 
+#include <sstream>
 #include <iostream>
+#include <string>
 #include <fstream>
+#include <iomanip>
 
 // ========================================================
 // Macros
 
 #define HTAB "    "
+#define RED  "\033[31m"
+#define GRN  "\033[32m"
+#define CYN  "\033[36m"
+#define DFT  "\033[39m"
 
 // ========================================================
 // Class's Body
