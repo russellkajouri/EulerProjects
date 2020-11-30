@@ -15,7 +15,9 @@
 // ========================================================
 // Libraries
 
+#include <sstream>
 #include <iostream>
+#include <string>
 #include <fstream>
 
 // ========================================================

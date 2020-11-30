@@ -47,11 +47,27 @@ void computer :: initializer(){
 	// to display the message and trunc the buffer
 	std::cout << HTAB << "The file is found!" << std::endl;
 
-
 	// ---------------------------------------------------------------------
 
 
-	int rowsCounter, clmnsCounter;
+	int rowsCounter = 0, clmnsCounter = 0;
+	std::string line, nums;
+
+	// to find number of lines
+	while(getline(in, line)){
+		
+		if(check){
+			std::stringstream ss(line);
+			while(getline(ss, nums, ' '))
+				clmnsCounter++;
+			
+			check = false;
+		}
+		
+		rowsCounter++;
+	}
+	
+	std::cout << rowsCounter << '\t' << clmnsCounter << '\n';
 
 }
 
