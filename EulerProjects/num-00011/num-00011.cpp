@@ -26,7 +26,7 @@ void computer :: initializer(){
 
 	do{
 		// to clear the screen
-		system("clear");
+		while(system("clear"));
 
 		// to display error when the file dose not exist or whatever
 		if(check) std::cout << HTAB << "Error, Unable to find file...\n";
@@ -50,24 +50,60 @@ void computer :: initializer(){
 	// ---------------------------------------------------------------------
 
 
-	int rowsCounter = 0, clmnsCounter = 0;
+	rows = 0; clmns = 0;
 	std::string line, nums;
 
 	// to find number of lines
 	while(getline(in, line)){
 		
+		std::cout << HTAB << line << '\n';
+
+		// to find the number of clmn, once 
 		if(check){
 			std::stringstream ss(line);
 			while(getline(ss, nums, ' '))
-				clmnsCounter++;
+				clmns++;
 			
 			check = false;
 		}
 		
-		rowsCounter++;
+		rows++;
+	}
+
+	// to create the array by pointer
+	arr = new int *[rows];
+	for(int i = 0; i<rows; i++)
+		arr[i] = new int [clmns];
+
+
+	// to return to the begging of the file
+	in.clear();
+	in.seekg(0, std::ios::beg);
+
+	// to fill the poiter-array by data
+	line = ""; nums = "";
+	int row = 0, clmn;
+
+	while(getline(in, line)){
+		clmn = 0;
+		
+		std::stringstream ss(line);
+		while(getline(ss, nums, ' ')){
+			arr[row][clmn] = stoi(nums);
+			clmn++;	
+		}
+
+		row++;
 	}
 	
-	std::cout << rowsCounter << '\t' << clmnsCounter << '\n';
+	std::cout << std::setw(2);
+	for(int i = 0; i < rows; i++){
+		for(int j = 0; j < clmns; j++)
+			std::cout << arr[i][j] << ' ';
+		std::cout << '\n';
+	}
+
+	std::cout << rows << '\t' << clmns << '\n';
 
 }
 
