@@ -1,4 +1,4 @@
-CFLAGS = -O
+CFLAGS = -O -Wunused-result
 CC = g++
 
 SRC = *.cpp
