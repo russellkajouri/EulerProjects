@@ -97,18 +97,64 @@ void computer :: initializer(){
 	}
 	
 
-	std::cout << RED << HTAB << "array has been filled..." << CYN << std::endl;
+	std::cout << RED << HTAB << \
+		"Matrix has been filled..." << CYN << std::endl;
+	std::cout << CYN << HTAB << "Rows: " <<\
+		rows << " | Columns: " << clmns << DFT << '\n';
+
+}
+
+// ----------------------------------------------------------------------------
+
+void computer :: showMatrix(){
 
 	for(int i = 0; i < rows; i++){
+		
 		std::cout << HTAB;
 		for(int j = 0; j < clmns; j++){
 			std::cout << std::setw(2) << arr[i][j] << ' ';
 			std::cout.width(2);
 		}
+		
 		std::cout << '\n';
 	}
-
-	std::cout << DFT << rows << '\t' << clmns << '\n';
-
 }
 
+// ----------------------------------------------------------------------------
+
+int computer :: multiplication(int num){
+
+
+	best = 1;
+
+	for(int r = 0; r < rows; r++){
+		for(int cl = 0; cl < clmns; cl++){
+	
+			if(cl + num < clmns){
+				int current = arr[r][cl] * arr[r][cl+1] * arr[r][cl+2] * arr[r][cl+3];
+				if(current > best)
+					best = current;
+			}
+				
+			if(r + num < rows){
+				int current = arr[r][cl] * arr[r+1][cl] * arr[r+2][cl] * arr[r+3][cl];
+				if(current > best)
+					best = current;
+			}
+
+			if(cl + num < clmns && r + num < rows){
+				int current = arr[r][cl] * arr[r+1][cl+1] * arr[r+2][cl+2] * arr[r+3][cl+3];
+				if(current > best)
+					best = current;
+			}
+
+			if(r + num < rows && cl > 2){
+				int current = arr[r][cl] * arr[r+1][cl-1] * arr[r+2][cl-2] * arr[r+3][cl-3];
+				if(current > best)
+					best = current;
+			}
+		}
+	}
+
+	return best;
+}

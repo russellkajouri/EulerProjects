@@ -22,6 +22,11 @@ computer finder;
 int main(){
 
 	finder.initializer();
+	finder.showMatrix();
+	int ans = finder.multiplication(3);
+
+	std::cout << HTAB "The biggest product is: " << ans << ".\n";
+
 	return 0;
 }
 

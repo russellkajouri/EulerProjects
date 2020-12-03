@@ -38,6 +38,9 @@ class computer{
 	public:
 		// to begin the code
 		void initializer();
+		void showMatrix();
+
+		int multiplication(int); 
 
 	private:
 		// create a 2d pointer 
@@ -46,6 +49,8 @@ class computer{
 		std::string nameOfInputFile;
 		// rows and columns of the input file
 		int rows, clmns;
+
+		int best;
 
 };
 
