@@ -21,6 +21,7 @@
 #include <fstream>
 #include <iomanip>
 
+
 // ========================================================
 // Macros
 
@@ -43,7 +44,7 @@ class computer{
 
 	private:
 		// create a 2d pointer 
-		int **arr;
+		std::string **arr;
 		// to store the name of input file
 		std::string nameOfInputFile;
 		// rows and columns of the input file

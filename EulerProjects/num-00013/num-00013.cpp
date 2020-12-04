@@ -56,7 +56,7 @@ void computer :: initializer(){
 	// to find number of lines
 	while(getline(in, line)){
 		
-		std::cout << HTAB << GRN << line << '\n';
+		std::cout << HTAB << CYN << line << '\n';
 
 		// to find the number of clmn, once 
 		if(check){
@@ -70,33 +70,30 @@ void computer :: initializer(){
 		rows++;
 	}
 
-
-	// to create the array by pointer
-	arr = new int *[rows];
-	for(int i = 0; i<rows; i++)
-		arr[i] = new int [clmns];
-
-
-	// to return to the begging of the file
+	// to come back the beginning of the file
 	in.clear();
 	in.seekg(0, std::ios::beg);
 
-	// to fill the poiter-array by data
-	line = ""; nums = "";
+
+	// to create the array
+	arr = new std::string * [rows];
+	for(int i=0; i < rows; i++)
+		arr[i] = new std::string[clmns];
+	
+
 	int row = 0, clmn;
+	std::string l;
 
 	while(getline(in, line)){
 		clmn = 0;
-		
 		std::stringstream ss(line);
-		while(getline(ss, nums, ' ')){
-			arr[row][clmn] = stoi(nums);
-			clmn++;	
+		while(getline(ss, l, ' ')){
+			arr[row][clmn] = l;
+			clmn++;
 		}
 
 		row++;
 	}
-	
 
 	std::cout << RED << HTAB << \
 		"Matrix has been filled..." << CYN << std::endl;
