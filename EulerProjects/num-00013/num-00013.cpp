@@ -102,3 +102,157 @@ void computer :: initializer(){
 
 }
 
+
+void computer :: convert(){
+
+	// to find the string's leagth
+	len = arr[0][0].length();
+	
+	// to create a new integer array
+	nums = new int *[rows];
+	for(int r = 0; r < rows; r++)
+		nums[r] = new int [len];
+
+
+
+	std::cout << RED << VTAB << HTAB \
+		<< "The ultimate form of the file ..." \
+		<< CYN << std::endl;
+
+
+	for(int r = 0; r <rows; r++){
+		for(int cl = 0; cl < clmns; cl++){
+
+			
+			std::cout << std::setw(4);
+			std::cout << std::setfill(' ');
+			std::cout << std::left;
+			std::cout << r + 1;
+
+			for(int l=0; l < len; l++){
+				// to convert the character to integer
+				nums[r][l] = arr[r][cl][l] - '0';
+				std::cout << nums[r][l];
+			}
+			std::cout << std::endl;
+		}
+	}
+
+	std::cout << DFT;
+
+	for(int r = 0 ; r < rows; r++)
+		delete [] arr[r];
+	delete [] arr;
+
+}
+
+
+
+void computer :: swap(int a, int b){
+
+	/**************************
+	 * to swap two numbers
+	 *
+	 * A = A + B
+	 * B = A - B
+	 * A = A - B
+	 *
+	 **************************/
+
+
+	for(int l=0; l < len; l++){
+		
+		nums[a][l] = nums[a][l] + nums[b][l];
+		nums[b][l] = nums[a][l] - nums[b][l];
+		nums[a][l] = nums[a][l] - nums[b][l];	
+	}
+
+}
+
+void computer :: sort(){
+
+	for(int r = 0; r < rows; r++){
+		for(int r2 = r+1; r2 < rows; r2++){
+		
+			for(int l = 0; l < len; l++){
+				
+				if(nums[r][l] > nums[r2][l])
+					break;
+				else if(nums[r][l] < nums[r2][l]){
+					//std::cout << RED << "swap: " << r << "," << r2 << CYN << '\n';
+					this -> swap(r, r2);
+					break;
+				}
+			}
+		
+		}
+	
+	}
+
+	std::cout << VTAB << HTAB << RED \
+		<< "The sorted file ...." << CYN << '\n';
+
+	for(int r = 0; r <rows; r++){
+
+			std::cout << std::setw(4);
+			std::cout << std::setfill(' ');
+			std::cout << std::left;
+			std::cout << r + 1;
+
+			for(int l=0; l < len; l++)
+				std::cout << nums[r][l];
+
+			std::cout << std::endl;
+	}
+
+	std::cout << DFT;
+
+}
+
+
+void computer :: summation (int *a, int *b, int* sum){
+
+
+	for(int l = 0; l < len+1; l++)
+		sum[l] = 0;
+
+
+	for(int l = len - 1; l >= 0; l--){
+
+		sum[l+1] += a[l] + b[l];
+
+		//std::cout << a[l] << '-' << b[l] << '-' << sum[l+1] << '\t';
+
+		if(sum[l+1] > 9){
+		
+			sum[l] = sum[l+1] / 10;
+			sum[l+1] %= 10;
+		
+		}
+
+		//std::cout << sum[l+1] <<'\n';
+	}
+
+}
+
+
+void computer :: operation(){
+
+
+	int *ans = new int [len+1];
+	int *big_ans = new int [len+1];
+
+	for(int r = 0; r < 10; r+=2){
+	
+		this -> summation(nums[r], nums[r+1], ans);
+
+		this -> summation(ans, big_ans, big_ans);
+	
+	}
+
+	std::cout << "ans: ";
+	for(int i = 0; i < len+1; i++)
+		std::cout << big_ans[i];
+	std::cout <<std::endl;
+
+}

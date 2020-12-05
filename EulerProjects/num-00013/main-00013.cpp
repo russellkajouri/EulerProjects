@@ -22,6 +22,10 @@ computer finder;
 int main(){
 
 	finder.initializer();
+	finder.convert();
+	finder.sort();
+	finder.operation();
+
 	return 0;
 }
 

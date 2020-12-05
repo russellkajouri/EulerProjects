@@ -20,6 +20,7 @@
 #include <string>
 #include <fstream>
 #include <iomanip>
+#include <array>
 
 
 // ========================================================
@@ -41,14 +42,20 @@ class computer{
 	public:
 		// to begin the code
 		void initializer();
+		void convert();
+		void swap(int, int);
+		void sort();
+		void operation();
+		void summation(int*, int*, int*);
 
 	private:
 		// create a 2d pointer 
 		std::string **arr;
+		int **nums;
 		// to store the name of input file
 		std::string nameOfInputFile;
 		// rows and columns of the input file
-		int rows, clmns;
+		int rows, clmns, len;
 
 };
 
