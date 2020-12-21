@@ -4,65 +4,64 @@
 
 #include <iostream>
 #include <string>
-#include <stdexcept>
 
 
 // to create the namespace of the long numbers
 // package which calculates basical math's problems
 
-namespace lnp{
+class computer{
 
-	using std::cout;
-	using std::cin;
-	using std::endl;
-	using std::cerr;
-
-	#define HTAB "    "
-	#define VTAB "\n\n"
-
-	class strnum;
-} 
-
-class lnp :: strnum {
 
 	private:
-		unsigned short * str;
-		unsigned int strlen = 0;
-			
+		short * arr1;
+		short * arr2;
+
 	public:
-		strnum(std::string);
-		strnum();
-		// to convert string numbers
-		unsigned short* stoa(std::string);
-		unsigned short* stoa();
-		unsigned int strlength();
-	
+		int counter (short base){
+			int n = 0;
+			while(base != 0 && n++) base /= 10;
+		}
+
+		// --------------------------------------------
+		void pow(short base, short pow){
+
+			decltype(base) base2 = base;
+			int size = this -> counter(base2);
+			arr1 = new short [size];
+
+			// -------------------------------
+
+			for(int i = 0; i < size; i++){
+				arr1[i] = base2 % 10;
+				base2 /= 10;
+			}
+			
+			arr2 = arr1;
+			// -------------------------------
+
+			short * ans;
+			int size2 = 2 * size;
+			for(short p = 1; p < pow; p++){
+				ans = new short [size2];
+
+				for(int i = 0; i <size; i++){
+					for(int j = 0; j < size; j++){
+
+						std::cout << arr1[i]  << '|' << arr2[j] << "|C: ";
+
+						int current = arr1[i] * arr2[j];
+						ans[i + j] += current % 10;
+
+						if(current > 9) ans[i+j+1] = current / 10;
+
+						std::cout << current << "|ansij"
+
+					}
+				}
+
+			}
+		
+		} // end of pow func
+
 };
-
-// ----------------------------------------------------------------------------
-
-lnp :: strnum :: strnum () { }
-lnp :: strnum :: strnum(std::string numstr){
-	strlen = numstr.length();
-	str = new unsigned short [strlen];
-	for(int b = 0; b < strlen; b++) str[b] = numstr[b] - '0';
-}
-
-// ----------------------------------------------------------------------------
-
-unsigned short* lnp :: strnum :: stoa(){
-	return strlen > 0 ? str : nullptr;
-}
-unsigned short* lnp :: strnum :: stoa(std::string numstr){
-	strlen = numstr.length();
-	str = new unsigned short [strlen];
-	for(unsigned int b = 0; b < strlen; b++) str[b] = numstr[b] - '0';
-	return str;
-}
-
-// ----------------------------------------------------------------------------
-
-unsigned int lnp :: strnum :: strlength(){ return strlen > 0 ? strlen : 0; }
-//unsigned int lnp :: strnum :: strlength(){}
-
 #endif // NUM_16_HPP
