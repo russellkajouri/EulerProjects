@@ -1,103 +1,97 @@
+/* ******************************************************************
+ * This code calculate the number of digit of the 100!
+ * Author : KAJO
+ * Address: kajothecoder@gmail.com
+ * last modified : 14 Mar 2021
+ * ******************************************************************/
+// ******************************************************************
 #include <iostream>
 #include <climits>
+#include <vector>
+#include <cstdint>
 
+// ****************8*************************************************
+constexpr uint8_t ZERO = 0;
+constexpr uint8_t ONE = 1;
+constexpr uint8_t NINE = 9;
+constexpr uint8_t TEN = 10;
 
-//unsigned long long int Number;
-//unsigned long long int GetValue();
-//unsigned long long int FactorialOf(unsigned long long int);
-
-short* Product(auto*, auto, auto*, auto, auto&);
-
+// ******************************************************************
+std::vector<uint8_t> Product(const std::vector<uint8_t>&,
+		const std::vector<uint8_t>&);
+std::vector<uint8_t> Splitter(unsigned int);
+unsigned long long int Sum(std::vector<uint8_t>&);
+std::vector<uint8_t> ZerosCounter(const std::vector<uint8_t>&);
+// ******************************************************************
 int main(){
 
-	short * A = new short [2];
+	std::vector<uint8_t> C = {ONE};
+	for(unsigned int num=2; num<101; num++){
+		printf("%u!: ", num);
+		C = Product(Splitter(num), C);
+		for(unsigned int L=C.size(); L>ZERO; L--)
+			printf("%d", C[L-ONE]);
+		printf("\n");
+	}
 
-	A[0] = 1;
-	A[1] = 5;
+	unsigned long long int answer = Sum(C);
+	std::cout <<"# 100!: "<< answer << std::endl;
 
 
-	short * B = new short [2];
 
-	B[0] = 1;
-	B[1] = 7;
-
-	short * C;
-	int L;
-
-	C = Product(A, 2, B, 2, L);
-
-	
-	for(int i=0; i<L; i++)
-		std::cout << C[i];
-	std::cout << std::endl;
-	
-	
-	/*
-	Number = GetValue();
-	std::cout << "Factorial: " 
-		<< FactorialOf(Number)
-		<< std::endl;
-	*/
 	return 0;
 }
+// ******************************************************************
+std::vector<uint8_t> Product(const std::vector<uint8_t> &A, const std::vector<uint8_t> &B){
+	std::vector<uint8_t> a = ZerosCounter(A);
+	std::vector<uint8_t> b = ZerosCounter(B);
+	unsigned int diff = A.size() - a.size();
+	diff += B.size() - b.size();
 
 
-short* Product(auto* a, auto la, auto* b, auto lb, auto& L){
+	std::vector<uint8_t> P;
+	P.resize(a.size()>b.size()?a.size():b.size(), ZERO);
 
-	auto lp = la > lb ? la : lb;
-	short * P = new short [++lp];
+	for(auto l=ZERO; l<a.size(); l++)
+		for(auto k=ZERO, h=l; k<b.size(); k++,h++){
 
-	short ans, quotient;
+			P[h] += a[l] * b[k];
+			if(P[h] > NINE){
+				if(P.size() <= h+ONE) P.push_back(ZERO);
 
-	for(auto l=0; l<la; l++){
-		quotient = 0;
-		for(auto k=0, h=l; k<lb; k++,h++){
-
-			ans = a[l] * b[k];
-			P[h] = quotient + ans % 10;
-
-			quotient = int(ans / 10);
-			
-			if(P[h] > 9){
-				
-				short* PC = P;
-				P = new short [++lp];
-
-				for(int q=0; q < lp; q++)
-					P[q] = PC[q];
-
-				P[h] %= 10;
-				P[h+1] = P[h] / 10;
-
-				delete [] PC;
+				P[h+ONE] += uint8_t(P[h] / TEN);
+				P[h] %= TEN;
 			}
-
 		}
-	}
 
-	L = lp;
+	while(diff--!=ZERO)
+		P.insert(P.begin(), ZERO);
+
 	return P;
 }
-
-/*
-unsigned long long int GetValue(){
-	while(true){
-	
-		std::cout << "Enter the number: ";
-		std::cin >> Number;
-
-		if(Number < ULLONG_MAX - 1)
-			return Number;
-		else
-			std::cout << "It seems that ur number is incorrect.\n";
+// ******************************************************************
+std::vector<uint8_t> Splitter(unsigned int number){
+	std::vector<uint8_t>ans;
+	while(number != ZERO){
+		ans.push_back(number%TEN);
+		number /= TEN;
 	}
+	return ans;
 }
-
-unsigned long long int FactorialOf(unsigned long long int Number){
-
-	if(Number == 1 || Number == 0)
-		return 1;
-
-	return Number * FactorialOf(Number - 1);
+// ******************************************************************
+unsigned long long int Sum(std::vector<uint8_t> &N){
+	unsigned long long int ans = ZERO;
+	for(long unsigned int C=ZERO; C<N.size(); C++)
+		ans += unsigned(N[C]);
+	return ans;
 }
-*/
+// ******************************************************************
+std::vector<uint8_t> ZerosCounter(const std::vector<uint8_t> &a){
+	long unsigned number_of_zero = ZERO;
+	for(long unsigned int F=ZERO; F<a.size(); F++)
+		if(a[F] == ZERO)
+			number_of_zero++;
+		else
+			break;
+	return std::vector<uint8_t>(a.begin()+number_of_zero, a.end());
+}

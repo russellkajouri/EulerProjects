@@ -15,9 +15,9 @@ short* Product(auto* a, auto la, auto* b, auto lb){
 			P[h] = quotient + ans % 10;
 
 			quotient = int(ans / 10);
-			
+
 			if(P[h] > 9){
-				
+
 				short* PC = P;
 				P = new short [++lp];
 
