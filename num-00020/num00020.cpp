@@ -27,8 +27,9 @@ int main(){
 
 	std::vector<uint8_t> C = {ONE};
 	for(unsigned int num=2; num<101; num++){
-		printf("%u!: ", num);
 		C = Product(Splitter(num), C);
+
+		printf("%u!: ", num);
 		for(unsigned int L=C.size(); L>ZERO; L--)
 			printf("%d", C[L-ONE]);
 		printf("\n");
@@ -47,6 +48,15 @@ std::vector<uint8_t> Product(const std::vector<uint8_t> &A, const std::vector<ui
 	std::vector<uint8_t> b = ZerosCounter(B);
 	unsigned int diff = A.size() - a.size();
 	diff += B.size() - b.size();
+/*
+	for(auto &FF:b)
+		std::cout << unsigned(FF);
+	std::cout<<std::endl;
+
+	for(auto &FF:a)
+		std::cout << unsigned(FF);
+	std::cout<<std::endl;
+*/
 
 
 	std::vector<uint8_t> P;
@@ -56,16 +66,27 @@ std::vector<uint8_t> Product(const std::vector<uint8_t> &A, const std::vector<ui
 		for(auto k=ZERO, h=l; k<b.size(); k++,h++){
 
 			P[h] += a[l] * b[k];
-			if(P[h] > NINE){
-				if(P.size() <= h+ONE) P.push_back(ZERO);
 
+			if(P.size() <= h+ONE) P.push_back(ZERO);
+			if(P[h] > NINE){
 				P[h+ONE] += uint8_t(P[h] / TEN);
 				P[h] %= TEN;
 			}
+
+
 		}
 
 	while(diff--!=ZERO)
 		P.insert(P.begin(), ZERO);
+
+	while(true){
+		if(P[P.size()-ONE] == ZERO)
+			P.pop_back();
+		else
+			break;
+
+
+	}
 
 	return P;
 }
