@@ -26,14 +26,8 @@ std::vector<uint8_t> ZerosCounter(const std::vector<uint8_t>&);
 int main(){
 
 	std::vector<uint8_t> C = {ONE};
-	for(unsigned int num=2; num<101; num++){
+	for(unsigned int num=2; num<101; num++)
 		C = Product(Splitter(num), C);
-
-		printf("%u!: ", num);
-		for(unsigned int L=C.size(); L>ZERO; L--)
-			printf("%d", C[L-ONE]);
-		printf("\n");
-	}
 
 	unsigned long long int answer = Sum(C);
 	std::cout <<"# 100!: "<< answer << std::endl;
