@@ -23,6 +23,7 @@ while we should not forget there are some mutual answers betwee the bases 4 and 
 then we have to find mututal answers between the bases 2 and 16, 32, 64, and also other mutual numbers which belong to e.g. the bases 16, and 32.
 
 So, let us write a function to do something faster.
+'''
 > def comp( A, B ):
 >   C = []
 >   for a in A:
@@ -30,4 +31,4 @@ So, let us write a function to do something faster.
 >       if a==b:
 >         C.append(a)
 > return C
-
+'''
